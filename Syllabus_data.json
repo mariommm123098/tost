@@ -1,0 +1,66 @@
+[
+  {
+    "topic": "Quadratics",
+    "syllabus_reference": "1.1",
+    "keywords": ["quadratic equation", "discriminant", "roots", "completing the square", "inequality"],
+    "book": "Cambridge International AS & A Level Mathematics Pure Mathematics 1, 3rd ed.",
+    "chapter": "Chapter 1: Quadratics",
+    "page_range": "1-31"
+  },
+  {
+    "topic": "Functions and inverse functions",
+    "syllabus_reference": "1.2",
+    "keywords": ["function", "domain", "range", "composition", "inverse"],
+    "book": "Cambridge International AS & A Level Mathematics Pure Mathematics 1, 3rd ed.",
+    "chapter": "Chapter 2: Functions",
+    "page_range": "33-67"
+  },
+  {
+    "topic": "Coordinate geometry",
+    "syllabus_reference": "1.3",
+    "keywords": ["straight line", "circle", "gradient", "distance", "intersection"],
+    "book": "Cambridge International AS & A Level Mathematics Pure Mathematics 1, 3rd ed.",
+    "chapter": "Chapter 3: Coordinate geometry",
+    "page_range": "70-92"
+  },
+  {
+    "topic": "Circular measure",
+    "syllabus_reference": "1.4",
+    "keywords": ["radian", "arc length", "sector area", "degrees", "circle"],
+    "book": "Cambridge International AS & A Level Mathematics Pure Mathematics 1, 3rd ed.",
+    "chapter": "Chapter 4: Circular measure",
+    "page_range": "99-112"
+  },
+  {
+    "topic": "Trigonometry",
+    "syllabus_reference": "1.5",
+    "keywords": ["sine", "cosine", "tangent", "identity", "equation"],
+    "book": "Cambridge International AS & A Level Mathematics Pure Mathematics 1, 3rd ed.",
+    "chapter": "Chapter 5: Trigonometry",
+    "page_range": "116-153"
+  },
+  {
+    "topic": "Series",
+    "syllabus_reference": "1.6",
+    "keywords": ["binomial expansion", "arithmetic progression", "geometric progression", "series", "sum to infinity"],
+    "book": "Cambridge International AS & A Level Mathematics Pure Mathematics 1, 3rd ed.",
+    "chapter": "Chapter 6: Series",
+    "page_range": "155-183"
+  },
+  {
+    "topic": "Differentiation",
+    "syllabus_reference": "1.7",
+    "keywords": ["derivative", "gradient", "chain rule", "stationary point", "rate of change"],
+    "book": "Cambridge International AS & A Level Mathematics Pure Mathematics 1, 3rd ed.",
+    "chapter": "Chapter 7–8: Differentiation & Further differentiation",
+    "page_range": "190-235"
+  },
+  {
+    "topic": "Integration",
+    "syllabus_reference": "1.8",
+    "keywords": ["indefinite integral", "definite integral", "area under curve", "volume of revolution", "constant of integration"],
+    "book": "Cambridge International AS & A Level Mathematics Pure Mathematics 1, 3rd ed.",
+    "chapter": "Chapter 9: Integration",
+    "page_range": "238-276"
+  }
+]
