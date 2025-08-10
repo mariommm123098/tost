@@ -2,65 +2,377 @@
   {
     "topic": "Quadratics",
     "syllabus_reference": "1.1",
-    "keywords": ["quadratic equation", "discriminant", "roots", "completing the square", "inequality"],
+    "weight": 1.2,
     "book": "Cambridge International AS & A Level Mathematics Pure Mathematics 1, 3rd ed.",
     "chapter": "Chapter 1: Quadratics",
-    "page_range": "1-31"
+    "page_range": "pp.1–31",
+    "reference_link": "https://ebooks.papacambridge.com/directories/CAIE/CAIE-ebooks/upload/cambridge%20international%20as%20and%20a%20level%20pure%20mathematics%201%20coursebook.pdf",
+    "keywords": ["quadratic", "parabola", "ax^2+bx+c", "roots", "discriminant", "complete the square", "vertex", "turning point", "inequality"],
+    "subtopics": [
+      {
+        "name": "Form & Graph of a Quadratic",
+        "code": "1.1.a",
+        "outcomes": [
+          "Interpret a, b, c in y = ax^2 + bx + c.",
+          "Identify axis of symmetry, vertex, and intercepts."
+        ],
+        "keywords": ["axis of symmetry", "vertex", "turning point", "intercept", "parabola opens up/down"],
+        "formulas": ["x_{vertex} = -\\frac{b}{2a}", "y_{vertex} = f\\!\\left(-\\frac{b}{2a}\\right)"],
+        "regex": ["axis of symmetry", "turning point", "sketch.*parabola"],
+        "book_pages": "pp.1–6 (shape & parameters), pp.10–12 (sketching)"
+      },
+      {
+        "name": "Roots & Discriminant",
+        "code": "1.1.b",
+        "outcomes": [
+          "Use discriminant to determine nature of roots.",
+          "Solve parameter problems with ‘one root’, ‘equal roots’, or ‘no real roots’."
+        ],
+        "keywords": ["discriminant", "nature of roots", "equal roots", "repeated root", "one intersection"],
+        "formulas": ["\\Delta = b^2 - 4ac", "equal\\ roots \\iff \\Delta = 0"],
+        "regex": ["(one|only one|exactly one) (root|intersection)", "two distinct real roots", "no real roots", "touch(es) the curve"],
+        "examples": ["Find k so that the line y = mx + c meets the curve y = ax^2+bx+c at exactly one point."],
+        "book_pages": "pp.6–12 (discriminant & cases), worked examples pp.12–14",
+        "weight": 1.4
+      },
+      {
+        "name": "Completing the Square",
+        "code": "1.1.c",
+        "outcomes": [
+          "Complete the square and use to locate vertex, solve equations/inequalities."
+        ],
+        "keywords": ["complete the square", "h,k form", "vertex form", "minimum", "maximum"],
+        "formulas": ["ax^2+bx+c = a\\big(x+\\tfrac{b}{2a}\\big)^2 - \\tfrac{\\Delta}{4a}"],
+        "regex": ["complete the square", "express.*in the form a\\(x\\+h\\)^2\\+k"],
+        "book_pages": "pp.14–19 (technique), pp.19–22 (applications)"
+      },
+      {
+        "name": "Quadratic Formula & Parametric Conditions",
+        "code": "1.1.d",
+        "outcomes": [
+          "Use quadratic formula and apply constraints on parameters."
+        ],
+        "keywords": ["quadratic formula", "parameter", "condition on k/m"],
+        "formulas": ["x = \\frac{-b \\pm \\sqrt{\\Delta}}{2a}"],
+        "regex": ["hence find the range of k", "values of k for which"],
+        "book_pages": "pp.22–26 (formula), pp.26–31 (parameter problems)"
+      },
+      {
+        "name": "Quadratic Inequalities",
+        "code": "1.1.e",
+        "outcomes": [
+          "Solve quadratic inequalities; interval notation; sign diagram."
+        ],
+        "keywords": ["inequality", "sign diagram", "interval", "region"],
+        "regex": ["solve .* > 0", "hence find the set of x", "range of x"],
+        "book_pages": "pp.19–22 (inequalities), examples pp.23–24"
+      }
+    ]
   },
+
   {
-    "topic": "Functions and inverse functions",
+    "topic": "Functions & Inverses",
     "syllabus_reference": "1.2",
-    "keywords": ["function", "domain", "range", "composition", "inverse"],
+    "weight": 1.2,
     "book": "Cambridge International AS & A Level Mathematics Pure Mathematics 1, 3rd ed.",
     "chapter": "Chapter 2: Functions",
-    "page_range": "33-67"
+    "page_range": "pp.33–67",
+    "reference_link": "https://ebooks.papacambridge.com/directories/CAIE/CAIE-ebooks/upload/cambridge%20international%20as%20and%20a%20level%20pure%20mathematics%201%20coursebook.pdf",
+    "keywords": ["function", "mapping", "domain", "range", "composition", "inverse", "one-to-one", "many-to-one"],
+    "subtopics": [
+      {
+        "name": "Domain & Range",
+        "code": "1.2.a",
+        "outcomes": [
+          "State domain/range; handle restrictions (log, root, rational)."
+        ],
+        "keywords": ["valid x", "restrictions", "log domain", "square root domain", "asymptote"],
+        "regex": ["state the (domain|range)", "find the (largest|greatest) domain"],
+        "book_pages": "pp.33–41 (definitions & examples)"
+      },
+      {
+        "name": "Composite Functions",
+        "code": "1.2.b",
+        "outcomes": [
+          "Form f∘g and g∘f; determine domains; solve equations via composition."
+        ],
+        "keywords": ["compose", "composite", "f(g(x))", "g(f(x))"],
+        "regex": ["find f\\circ g", "solve .* using composition"],
+        "book_pages": "pp.41–49 (composition)"
+      },
+      {
+        "name": "Inverse Functions",
+        "code": "1.2.c",
+        "outcomes": [
+          "Find f^{-1}, state domain for invertibility; reflect graphs in y=x."
+        ],
+        "keywords": ["inverse", "one-to-one", "bijective", "restrict domain"],
+        "regex": ["find the inverse function", "sketch f and f\\^{-1}"],
+        "book_pages": "pp.49–59 (inverse), pp.60–67 (sketching & constraints)"
+      }
+    ]
   },
+
   {
-    "topic": "Coordinate geometry",
+    "topic": "Coordinate Geometry",
     "syllabus_reference": "1.3",
-    "keywords": ["straight line", "circle", "gradient", "distance", "intersection"],
+    "weight": 1.1,
     "book": "Cambridge International AS & A Level Mathematics Pure Mathematics 1, 3rd ed.",
     "chapter": "Chapter 3: Coordinate geometry",
-    "page_range": "70-92"
+    "page_range": "pp.70–92",
+    "reference_link": "https://ebooks.papacambridge.com/directories/CAIE/CAIE-ebooks/upload/cambridge%20international%20as%20and%20a%20level%20pure%20mathematics%201%20coursebook.pdf",
+    "keywords": ["straight line", "gradient", "midpoint", "distance", "perpendicular", "circle", "tangent"],
+    "subtopics": [
+      {
+        "name": "Lines: Gradient, Intercepts, Perpendicular",
+        "code": "1.3.a",
+        "outcomes": [
+          "Find gradient, intercepts; equation of line; perpendicular/parallel conditions."
+        ],
+        "keywords": ["gradient", "slope", "normal", "perpendicular", "parallel"],
+        "formulas": ["m_1 m_2 = -1 (perpendicular)"],
+        "regex": ["equation of the line", "perpendicular to", "distance from point to line"],
+        "book_pages": "pp.70–79 (line geometry)"
+      },
+      {
+        "name": "Distance & Midpoint",
+        "code": "1.3.b",
+        "outcomes": [
+          "Use distance and midpoint formulae in coordinate problems."
+        ],
+        "keywords": ["length", "distance", "midpoint"],
+        "formulas": ["d=\\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}", "M\\left(\\tfrac{x_1+x_2}{2},\\tfrac{y_1+y_2}{2}\\right)"],
+        "book_pages": "pp.79–84 (distance/midpoint)"
+      },
+      {
+        "name": "Circles: Equation, Centre, Radius, Tangent",
+        "code": "1.3.c",
+        "outcomes": [
+          "Find circle equation; centre and radius from general form; tangent/normal."
+        ],
+        "keywords": ["circle", "centre", "radius", "tangent", "normal"],
+        "regex": ["equation of the circle", "tangent to the circle at", "show that.*is a diameter"],
+        "book_pages": "pp.84–92 (circles)"
+      }
+    ]
   },
+
   {
-    "topic": "Circular measure",
+    "topic": "Circular Measure",
     "syllabus_reference": "1.4",
-    "keywords": ["radian", "arc length", "sector area", "degrees", "circle"],
+    "weight": 1.0,
     "book": "Cambridge International AS & A Level Mathematics Pure Mathematics 1, 3rd ed.",
     "chapter": "Chapter 4: Circular measure",
-    "page_range": "99-112"
+    "page_range": "pp.99–112",
+    "reference_link": "https://ebooks.papacambridge.com/directories/CAIE/CAIE-ebooks/upload/cambridge%20international%20as%20and%20a%20level%20pure%20mathematics%201%20coursebook.pdf",
+    "keywords": ["radian", "arc length", "sector area", "segment", "angle"],
+    "subtopics": [
+      {
+        "name": "Radian Measure",
+        "code": "1.4.a",
+        "outcomes": [
+          "Convert between degrees and radians; interpret radian as arc/ radius."
+        ],
+        "keywords": ["radian", "degrees to radians", "radians to degrees"],
+        "formulas": ["\\pi\\ \\text{rad} = 180^\\circ"],
+        "book_pages": "pp.99–103 (radian basics)"
+      },
+      {
+        "name": "Arc Length & Sector Area",
+        "code": "1.4.b",
+        "outcomes": [
+          "Calculate arc length and sector area; apply in geometry problems."
+        ],
+        "keywords": ["arc length", "sector", "segment", "annulus"],
+        "formulas": ["s=r\\theta", "A=\\tfrac{1}{2}r^2\\theta"],
+        "regex": ["find the length of the arc", "area of the sector"],
+        "book_pages": "pp.103–112 (formulas & applications)"
+      }
+    ]
   },
+
   {
     "topic": "Trigonometry",
     "syllabus_reference": "1.5",
-    "keywords": ["sine", "cosine", "tangent", "identity", "equation"],
+    "weight": 1.2,
     "book": "Cambridge International AS & A Level Mathematics Pure Mathematics 1, 3rd ed.",
     "chapter": "Chapter 5: Trigonometry",
-    "page_range": "116-153"
+    "page_range": "pp.116–153",
+    "reference_link": "https://ebooks.papacambridge.com/directories/CAIE/CAIE-ebooks/upload/cambridge%20international%20as%20and%20a%20level%20pure%20mathematics%201%20coursebook.pdf",
+    "keywords": ["trig identity", "R-form", "double angle", "addition formula", "equation", "graph", "amplitude", "phase"],
+    "subtopics": [
+      {
+        "name": "Trig Identities & R-form",
+        "code": "1.5.a",
+        "outcomes": [
+          "Prove/use identities; express a\\sin x + b\\cos x in R\\sin(x+\\alpha)."
+        ],
+        "keywords": ["identity", "R sin(x+α)", "R cos(x−α)", "amplitude", "phase"],
+        "formulas": ["a\\sin x + b\\cos x = R\\sin(x+\\alpha)"],
+        "regex": ["express .* in the form R ?sin\\(x\\+α\\)", "hence find the maximum"],
+        "book_pages": "pp.116–126 (identities), pp.126–134 (R-form)"
+      },
+      {
+        "name": "Addition & Double-angle",
+        "code": "1.5.b",
+        "outcomes": [
+          "Use addition/double-angle formulae to simplify or solve equations."
+        ],
+        "keywords": ["sin(A±B)", "cos(A±B)", "double angle", "2x"],
+        "formulas": ["\\sin(A\\pm B)=\\sin A \\cos B \\pm \\cos A \\sin B"],
+        "book_pages": "pp.134–142 (addition/double), pp.142–147 (equations)"
+      },
+      {
+        "name": "Trig Equations & Graphs",
+        "code": "1.5.c",
+        "outcomes": [
+          "Solve equations in a given interval; sketch graphs with transformations."
+        ],
+        "keywords": ["principal value", "general solution", "period", "amplitude", "phase shift"],
+        "regex": ["find all solutions .* 0 ≤ x ≤ .*", "sketch the graph of"],
+        "book_pages": "pp.147–153 (graphs & equations)"
+      }
+    ]
   },
+
   {
     "topic": "Series",
     "syllabus_reference": "1.6",
-    "keywords": ["binomial expansion", "arithmetic progression", "geometric progression", "series", "sum to infinity"],
+    "weight": 1.1,
     "book": "Cambridge International AS & A Level Mathematics Pure Mathematics 1, 3rd ed.",
     "chapter": "Chapter 6: Series",
-    "page_range": "155-183"
+    "page_range": "pp.155–183",
+    "reference_link": "https://ebooks.papacambridge.com/directories/CAIE/CAIE-ebooks/upload/cambridge%20international%20as%20and%20a%20level%20pure%20mathematics%201%20coursebook.pdf",
+    "keywords": ["AP", "GP", "binomial", "sigma", "sum to n", "sum to infinity", "term"],
+    "subtopics": [
+      {
+        "name": "Arithmetic Progression (AP)",
+        "code": "1.6.a",
+        "outcomes": [
+          "Use nth term and partial sum formulae; solve parameter problems."
+        ],
+        "keywords": ["common difference", "AP sum", "term position"],
+        "formulas": ["u_n = a + (n-1)d", "S_n = \\tfrac{n}{2}(2a + (n-1)d)"],
+        "book_pages": "pp.155–164 (AP basics & sums)"
+      },
+      {
+        "name": "Geometric Progression (GP)",
+        "code": "1.6.b",
+        "outcomes": [
+          "Use nth term; finite sum; sum to infinity (|r|<1); applications."
+        ],
+        "keywords": ["common ratio", "convergent", "sum to infinity"],
+        "formulas": ["u_n = ar^{n-1}", "S_n = a\\tfrac{1-r^n}{1-r}", "S_\\infty = \\tfrac{a}{1-r}"],
+        "book_pages": "pp.164–173 (GP & sums)"
+      },
+      {
+        "name": "Binomial Expansion",
+        "code": "1.6.c",
+        "outcomes": [
+          "Expand (a+bx)^n for integer n≥0; find a particular term; approximate values."
+        ],
+        "keywords": ["binomial coefficient", "general term", "approximation", "valid range"],
+        "formulas": ["(1+x)^n = \\sum_{k=0}^n {n\\choose k} x^k"],
+        "regex": ["find the coefficient of x\\^k", "the term independent of x"],
+        "book_pages": "pp.173–183 (binomial)"
+      }
+    ]
   },
+
   {
     "topic": "Differentiation",
     "syllabus_reference": "1.7",
-    "keywords": ["derivative", "gradient", "chain rule", "stationary point", "rate of change"],
+    "weight": 1.3,
     "book": "Cambridge International AS & A Level Mathematics Pure Mathematics 1, 3rd ed.",
     "chapter": "Chapter 7–8: Differentiation & Further differentiation",
-    "page_range": "190-235"
+    "page_range": "pp.190–235",
+    "reference_link": "https://ebooks.papacambridge.com/directories/CAIE/CAIE-ebooks/upload/cambridge%20international%20as%20and%20a%20level%20pure%20mathematics%201%20coursebook.pdf",
+    "keywords": ["derivative", "rate of change", "product rule", "quotient rule", "chain rule", "tangent", "normal", "stationary point", "increasing decreasing"],
+    "subtopics": [
+      {
+        "name": "Basic Rules & Gradients",
+        "code": "1.7.a",
+        "outcomes": [
+          "Differentiate polynomials, exponentials, trig; gradient function."
+        ],
+        "keywords": ["dy/dx", "gradient", "power rule", "exp", "sin cos tan"],
+        "formulas": ["\\frac{d}{dx}(x^n)=nx^{n-1}", "\\frac{d}{dx}(\\sin x)=\\cos x"],
+        "book_pages": "pp.190–199 (basic derivatives)"
+      },
+      {
+        "name": "Product/Quotient/Chain",
+        "code": "1.7.b",
+        "outcomes": [
+          "Apply product, quotient, and chain rule; implicit basics."
+        ],
+        "keywords": ["product rule", "quotient rule", "chain rule", "composite"],
+        "formulas": ["(uv)'=u'v+uv'", "\\left(\\frac{u}{v}\\right)'=\\frac{u'v-uv'}{v^2}"],
+        "book_pages": "pp.199–210 (composite rules)"
+      },
+      {
+        "name": "Stationary Points & Curve Sketching",
+        "code": "1.7.c",
+        "outcomes": [
+          "Find stationary points; classify using 2nd derivative; sketch."
+        ],
+        "keywords": ["stationary", "turning point", "maximum", "minimum", "inflection"],
+        "regex": ["find.*stationary point", "hence sketch the curve"],
+        "book_pages": "pp.210–221 (stationary & classification)"
+      },
+      {
+        "name": "Tangents, Normals, Rates",
+        "code": "1.7.d",
+        "outcomes": [
+          "Find tangent/normal at a point; rates of change word problems."
+        ],
+        "keywords": ["tangent", "normal", "rate of change", "related rates"],
+        "regex": ["equation of the normal", "at x = a", "rate .* when x ="],
+        "book_pages": "pp.221–235 (applications)"
+      }
+    ]
   },
+
   {
     "topic": "Integration",
     "syllabus_reference": "1.8",
-    "keywords": ["indefinite integral", "definite integral", "area under curve", "volume of revolution", "constant of integration"],
+    "weight": 1.3,
     "book": "Cambridge International AS & A Level Mathematics Pure Mathematics 1, 3rd ed.",
     "chapter": "Chapter 9: Integration",
-    "page_range": "238-276"
+    "page_range": "pp.238–276",
+    "reference_link": "https://ebooks.papacambridge.com/directories/CAIE/CAIE-ebooks/upload/cambridge%20international%20as%20and%20a%20level%20pure%20mathematics%201%20coursebook.pdf",
+    "keywords": ["indefinite integral", "definite integral", "substitution", "by parts", "area under curve", "constant of integration"],
+    "subtopics": [
+      {
+        "name": "Basic Antiderivatives",
+        "code": "1.8.a",
+        "outcomes": [
+          "Integrate polynomials, exp, sin, cos; add constant of integration."
+        ],
+        "keywords": ["antiderivative", "integrate", "constant C"],
+        "formulas": ["\\int x^n dx = \\frac{x^{n+1}}{n+1} + C (n\\neq -1)"],
+        "book_pages": "pp.238–248 (basic integrals)"
+      },
+      {
+        "name": "Definite Integral & Area",
+        "code": "1.8.b",
+        "outcomes": [
+          "Evaluate definite integrals; interpret area between curve and axis/lines."
+        ],
+        "keywords": ["limits", "area under curve", "between curves"],
+        "formulas": ["\\int_a^b f(x)\\,dx = F(b)-F(a)"],
+        "regex": ["find the area", "shaded region", "between x = .* and x = .*"],
+        "book_pages": "pp.248–260 (definite & area)"
+      },
+      {
+        "name": "Substitution / By Parts (intro)",
+        "code": "1.8.c",
+        "outcomes": [
+          "Use simple substitution; apply integration by parts in P1 scope."
+        ],
+        "keywords": ["substitute", "u-substitution", "by parts"],
+        "formulas": ["\\int u\\,dv = uv - \\int v\\,du"],
+        "book_pages": "pp.260–270 (methods), pp.270–276 (mixed problems)"
+      }
+    ]
   }
 ]
