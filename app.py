@@ -24,6 +24,13 @@ MODEL_NAME = "deepseek-chat"
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
+# Apple Silicon 上 tesseract 常见路径（找得到就用）
+try:
+    if os.path.exists("/opt/homebrew/bin/tesseract"):
+        pytesseract.pytesseract.tesseract_cmd = "/opt/homebrew/bin/tesseract"
+except Exception:
+    pass
+
 # ─────────── 读取考纲数据 ───────────
 with open("Syllabus_data.json", "r", encoding="utf-8") as f:
     SYLLABUS_DATA: List[Dict] = json.load(f)
@@ -219,8 +226,7 @@ INDEX_HTML = r"""
   const cvs = document.getElementById('bg');
   const ctx = cvs.getContext('2d');
   let W,H, P=[];
-  function resize(){ W= cver.width = cvs.width = window.innerWidth; H = cver.height = cvs.height = window.innerHeight; }
-  const cver={width:0,height:0};
+  function resize(){ cvs.width = W = window.innerWidth; cvs.height = H = window.innerHeight; }
   resize(); window.addEventListener('resize', resize);
   function make(n=60){
     P = Array.from({length:n},()=>({
@@ -255,7 +261,7 @@ INDEX_HTML = r"""
     lottie.loadAnimation({
       container: document.getElementById('lottie'),
       renderer: 'svg', loop: true, autoplay: true,
-      path: 'https://assets10.lottiefiles.com/packages/lf20_vnikrcia.json' // 轻量放大镜动画（如失效会自动忽略）
+      path: 'https://assets10.lottiefiles.com/packages/lf20_vnikrcia.json'
     });
   }catch(_){}
 
@@ -283,14 +289,14 @@ INDEX_HTML = r"""
     thumb.src = url; thumb.style.display='block';
   }
 
-  // 提交时显示全屏骨架，避免空白等待
+  // 提交时显示全屏骨架
   form.addEventListener('submit', ()=>{
     document.getElementById('loading').style.display='grid';
   });
 </script>
 """
 
-# ─────────── 结果页模板（动画/复制/打字/圆环/返回） ───────────
+# ─────────── 结果页模板（转义修复 + Markdown/TeX 渲染 + 动效） ───────────
 RESULT_HTML = r"""
 <!doctype html>
 <meta charset="utf-8" />
@@ -300,7 +306,7 @@ RESULT_HTML = r"""
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
-  // MathJax 配置（注意反斜杠需要转义）
+  // MathJax 配置
   window.MathJax = {
     tex: {inlineMath: [['\\(','\\)'],['$','$']], displayMath: [['\\[','\\]'],['$$','$$']]},
     svg: {fontCache: 'global'}
@@ -453,7 +459,6 @@ RESULT_HTML = r"""
     const p = Math.round((Number(r.dataset.score)||0) / max * 100);
     const ring = r.querySelector('.ring');
     const label = ring.querySelector('span');
-    // 补间动画
     gsap.fromTo(ring, {'--p': 0}, {'--p': p, duration:.8, ease:'power2.out',
       onUpdate(){ label.textContent = Math.round(parseFloat(getComputedStyle(ring).getPropertyValue('--p'))) + '%'; }
     });
@@ -474,22 +479,46 @@ RESULT_HTML = r"""
     });
   });
 
-  // DeepSeek 文本：先打字显示一段，再完整渲染 Markdown + MathJax
+  // ====== 反斜杠/转义修复 + Markdown/TeX 渲染 ======
   const RAW = {{ deepseek_answer | tojson }};
+
+  function normalizeMath(s){
+    // 1) 压平多重转义（\\\( -> \()
+    s = s
+      .replace(/\\\\\\\(/g, '\\(').replace(/\\\\\\\)/g, '\\)')
+      .replace(/\\\\\\\[/g, '\\[').replace(/\\\\\\\]/g, '\\]')
+      .replace(/\\\\\(/g, '\\(').replace(/\\\\\)/g, '\\)')
+      .replace(/\\\\\[/g, '\\[').replace(/\\\\\]/g, '\\]');
+
+    // 2) 把 \(…\)/\[…\] 兜底转换为 $…$/$$…$$
+    s = s.replace(/\\\(([^\n]+?)\\\)/g, '\$$1\$');         // inline
+    s = s.replace(/\\\[((?:.|\n)+?)\\\]/g, '\$\$$1\$\$');  // block
+
+    // 3) 去掉算符前多余的反斜杠（不影响 \alpha 等命令）
+    s = s.replace(/\\([=+\-*/^()])/g, '$1');
+    return s;
+  }
+
+  const RAW0 = normalizeMath(RAW);
+
   const typing = document.getElementById('aiTyping');
   const full = document.getElementById('ai');
-  const snippet = RAW.slice(0, Math.min(800, RAW.length)); // 先打 800 字符
+  const snippet = RAW0.slice(0, Math.min(800, RAW0.length)); // 先打 800 字符
+
+  // marked 配置：避免奇怪转义
+  marked.setOptions({ gfm:true, breaks:true, headerIds:false, mangle:false });
+
   let i=0;
-  const speed = 10; // 越小越快
+  const speed = 10;
   const timer = setInterval(()=>{
     typing.textContent = snippet.slice(0, i+=3);
     if(i >= snippet.length){
       clearInterval(timer);
-      // 完整渲染
-      full.innerHTML = marked.parse(RAW);
+      full.innerHTML = marked.parse(RAW0);
       typing.style.display='none';
       full.style.display='block';
       if (window.MathJax && window.MathJax.typesetPromise) {
+        if (MathJax.typesetClear) MathJax.typesetClear();
         MathJax.typesetPromise([full]);
       }
     }
@@ -517,12 +546,22 @@ def upload():
         # 1) OCR
         ocr_text = pytesseract.image_to_string(Image.open(path)).strip()
 
-        # 2) DeepSeek
+        # 2) DeepSeek：提示词规范 Markdown/TeX，禁止转义
+        system_prompt = (
+            "You are an expert A-Level tutor. Always respond in the user's language. "
+            "Output strictly in Markdown (no code fences). "
+            "Use $...$ for inline math and $$...$$ for display math. "
+            "Do NOT escape backslashes; write LaTeX commands normally (e.g., \\frac, \\sqrt). "
+            "Structure the solution with concise headings and steps. "
+            "Avoid unnecessary prose; keep math clean."
+        )
+        user_prompt = f"请针对这道题目给出**答案**与**详细解题思路**，按“问题重述 / 解题思路 / 详细解答 / 检查与总结 / 最终答案”的结构输出：\n\n{ocr_text}"
+
         resp = client.chat.completions.create(
             model=MODEL_NAME,
             messages=[
-                {"role": "system", "content": "You are an expert A-Level tutor."},
-                {"role": "user",   "content": f"请针对这道题目给出答案和详细解题思路：\n{ocr_text}"}
+                {"role": "system", "content": system_prompt},
+                {"role": "user",   "content": user_prompt}
             ],
             stream=False
         )
@@ -552,11 +591,20 @@ def api_upload():
         f.save(path)
 
         ocr_text = pytesseract.image_to_string(Image.open(path)).strip()
+
+        system_prompt = (
+            "You are an expert A-Level tutor. Always respond in the user's language. "
+            "Output strictly in Markdown (no code fences). "
+            "Use $...$ for inline math and $$...$$ for display math. "
+            "Do NOT escape backslashes; write LaTeX commands normally."
+        )
+        user_prompt = f"请针对这道题目给出答案和详细解题思路：\n{ocr_text}"
+
         resp = client.chat.completions.create(
             model=MODEL_NAME,
             messages=[
-                {"role": "system", "content": "You are an expert A-Level tutor."},
-                {"role": "user",   "content": f"请针对这道题目给出答案和详细解题思路：\n{ocr_text}"}
+                {"role": "system", "content": system_prompt},
+                {"role": "user",   "content": user_prompt}
             ],
             stream=False
         )
